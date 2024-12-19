@@ -1,0 +1,1 @@
+# Handling the state of the board(updating after a legal move, swithcing turns).
