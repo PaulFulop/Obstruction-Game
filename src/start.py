@@ -1,10 +1,8 @@
 # OBSTRUCTION GAME
+import sys
+sys.path.append("./src")
 
-from enum import Enum
-
-class Players(Enum):
-    HUMAN_PLAYER = 0
-    AI_PLAYER = 1
+from services.game_service import Players
 
 if __name__ == "__main__":
     pass

@@ -6,7 +6,10 @@ from domain.board import Board
 from services.ai_player import AIPlayerService
 from services.human_player import HumanPlayerService
 from services.moves import MoveService
-from start import Players
+from enum import Enum
+class Players(Enum):
+    HUMAN_PLAYER = 0
+    AI_PLAYER = 1
 
 class GameService:
     def __init__(self, firstPlayer:Players):
