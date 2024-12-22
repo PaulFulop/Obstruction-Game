@@ -14,4 +14,9 @@ class BoardStateService:
 
     @staticmethod
     def check_game_over(board:Board):
-        pass
+        for i in range(0, 6):
+            for j in range(0, 6):
+                if board[i, j] == ' ':
+                    return False
+        
+        return True

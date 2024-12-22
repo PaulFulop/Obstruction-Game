@@ -13,10 +13,8 @@ class MoveService:
     __directions = [(0, 0), (-1, -1), (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (0, -1), (1, -1)]
 
 
-    def __init__(self, board:Board, flag:bool):
+    def __init__(self, board:Board):
         self.__board = board
-        self.__flag = flag
-        self.__board_state = BoardStateService()
 
     def mark(self, x:int, y:int, symbol:str, k:int):
         if k > 8:
@@ -31,18 +29,26 @@ class MoveService:
         if self.__board[x, y] != ' ' and symbol != '*':
             raise ValueError("Can't put it there.")
         
-        self.__board_state.record_state(self.__board, self.__flag)
         self.__board[x + MoveService.__directions[k][0], y + MoveService.__directions[k][1]] = symbol
         self.mark(x, y, '*', k + 1)
-        self.__flag = not self.__flag
     
     @property
-    def flag(self):
-        return self.__flag
+    def board(self):
+        return self.__board
 
-board = Board()
-move = MoveService(board, 0)
-move.mark(0, 0, 'X', 0)
-move.mark(1, 2, 'O', 0)
-move.mark(2, 0, 'X', 0)
-print(board)
+# board = Board()
+# move = MoveService(board)
+# try:
+#     move.mark(0, 0, 'X', 0)
+#     move.mark(1, 2, 'O', 0)
+#     move.mark(5, 5, 'X', 0)
+#     move.mark(5, 3, 'X', 0)
+#     move.mark(3, 4, 'X', 0)
+#     move.mark(0, 5, 'X', 0)
+#     move.mark(3, 0, 'X', 0)
+#     move.mark(3, 2, '0', 0)
+#     move.mark(5, 0, '0', 0)
+# except ValueError as e:
+#     print(e)
+
+# print(board)
