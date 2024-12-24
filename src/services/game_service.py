@@ -19,11 +19,11 @@ class GameService:
         if firstPlayer.name == "HUMAN_PLAYER":
             self.__flag = False
             self.__human = HumanPlayerService(self.__moves_service, "0")
-            self.__computer = AIPlayerService(self.__moves_service, self.__board, "X")
+            self.__computer = AIPlayerService(self.__moves_service, "X")
         else:
             self.__flag = True
             self.__human = HumanPlayerService(self.__moves_service, "X")
-            self.__computer = AIPlayerService(self.__moves_service, self.__board, "0")
+            self.__computer = AIPlayerService(self.__moves_service, "0")
     
     def play_turn(self, x:int, y:int):
         if self.__flag == False:

@@ -7,23 +7,22 @@ from services.moves import MoveService
 from services.state import BoardStateService
 
 class AIPlayerService:
-    def __init__(self, moves_service:MoveService, board:Board, symbol:str):
+    def __init__(self, moves_service:MoveService, symbol:str):
         self.__moves_service = moves_service
-        self.__board = board
         self.__symbol = symbol
-        self.__board_state = BoardStateService
+        self.__board_state = BoardStateService()
     
     # minimax alg functions below
     def make_move(self):
         x = random.randint(0, 5)
         y = random.randint(0, 5)
 
-        while(self.__board[x, y] != ' '):
+        while(self.__moves_service.board[x, y] != ' '):
             x = random.randint(0, 5)
             y = random.randint(0, 5)
         
         self.__moves_service.mark(x, y, self.__symbol, 0)
-        self.__board_state.record_state(self.__board, 1)
+        self.__board_state.record_state(self.__moves_service.board, 1)
 
     def minimax(self):
         pass
@@ -31,7 +30,7 @@ class AIPlayerService:
 
 # board = Board()
 # move = MoveService(board)
-# ai = AIPlayerService(move, board, '0')
+# ai = AIPlayerService(move, '0')
 # try:
 #     ai.make_move()
 #     ai.make_move()

@@ -10,7 +10,7 @@ class HumanPlayerService:
     def __init__(self, moves_service:MoveService, symbol:str):
         self.__moves_service = moves_service
         self.__symbol = symbol
-        self.__board_state = BoardStateService
+        self.__board_state = BoardStateService()
     
     def make_move(self, x:int, y:int):
         self.__moves_service.mark(x, y, self.__symbol)
