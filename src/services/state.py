@@ -4,12 +4,16 @@ import sys
 sys.path.append("./src")
 from domain.board import Board
 from game_exceptions import GameOverError
+from repository.score_repo import ScoreRepo
 
 class BoardStateService:
-    @staticmethod
-    def record_state(board:Board, flag:bool):
+    def __init__(self):
+        self.__score_repo = ScoreRepo("src/repository/score.txt")
+
+    def record_state(self, board:Board, flag:bool):
         if BoardStateService.check_game_over(board) == True:
             current_player = "You" if not flag else "The computer" 
+            self.__score_repo.update_score(flag)
             raise GameOverError(current_player)
 
     @staticmethod
