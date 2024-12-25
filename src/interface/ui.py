@@ -6,6 +6,7 @@ from game_init import GameInit, Players
 from repository.score_repo import ScoreRepo
 from prettytable import PrettyTable
 from game_exceptions import GameOverError
+from rich.console import Console
 
 # TODO fix txt repo problem
 class UI:
@@ -13,9 +14,10 @@ class UI:
         self.__game = GameInit(firstPlayer)
         self.__score_repo = ScoreRepo("src/repository/score.txt")
         self.__first_player_info = "(you will play first)" if self.__game.flag == False else "(the computer will play first)"
+        self.__console = Console()
 
     def display_commands(self):
-        print("OBSTRUCTION GAME\n\n"
+        self.__console.print("[bold underline #61149c]OBSTRUCTION GAME[/bold underline #61149c]\n\n"
               "List of commands:\n\n"
               f"start -> start a new round {self.__first_player_info}\n"
               "score -> show the score\n"
@@ -28,10 +30,15 @@ class UI:
     def redraw_console(self, message:str):
         UI.clear_console()
         self.display_commands()
-        print(message + '\n')
+        self.__console.print(message + '\n')
+
+    def redraw_board(self):
+        UI.clear_console()
+        self.display_commands()
+        print(str(self.__game.board) + '\n')
 
     def display_human_move(self):
-        self.redraw_console(str(self.__game.board))
+        self.redraw_board()
         pos = input("Insert the position you want to mark here: ")
         tokens = pos.split()
         x = int(tokens[0].strip())
@@ -39,16 +46,20 @@ class UI:
         self.__game.human.make_move(x, y)
 
     def display_computer_move(self):
-        self.redraw_console(str(self.__game.board))
-        print("Computer thinking...")
-        time.sleep(2)
+        self.redraw_board()
+        with self.__console.status("Computer thinking..."):
+            time.sleep(1.6) 
         self.__game.computer.make_move()
     
     def run(self):
-        message = " "
+        message = ""
+        should_redraw = True
 
         while True:
-            self.redraw_console(message)
+            if should_redraw == True:
+                self.redraw_console(message)
+            else:
+                should_redraw = True
             cmd = input("> ")
 
             match cmd.lower().strip():
@@ -59,24 +70,35 @@ class UI:
                                 self.display_human_move()
                                 self.display_computer_move()
                             except GameOverError as goe:
-                                message = str(self.__game.board) + '\n\n' + str(goe)
+                                self.redraw_board()
+                                self.__console.print(f"[bold #50a353]{goe}\n[/bold #50a353]")
+                                self.__game.clear_board()
+                                should_redraw = False
                                 break
                             except Exception as e:
-                                print(e)
-                                time.sleep(2.5)
-                                pass
+                                self.__console.print(f"[bold red]{e}[/bold red]")
+                                time.sleep(2.25)
                     else:
                         while True:
                             try:
                                 self.display_computer_move()
                                 self.display_human_move()
                             except GameOverError as goe:
-                                message = str(self.__game.board + '\n\n' + goe)
+                                self.redraw_board()
+                                self.__console.print(f"[bold #50a353]{goe}\n[/bold #50a353]")
+                                self.__game.clear_board()
+                                should_redraw = False
                                 break
                             except Exception as e:
-                                print(e)
+                                self.__console.print(f"[bold red]{e}[/bold red]")
                                 time.sleep(2.25)
-                                pass
+                                while True:
+                                    try:
+                                        self.display_human_move()
+                                        break
+                                    except Exception as e:
+                                        self.__console.print(f"[bold red]{e}[/bold red]")
+                                        time.sleep(2.25)
                 case "score":
                     try:
                         tokens = self.__score_repo.data
@@ -86,12 +108,12 @@ class UI:
                         table.add_row([h_points, c_points])
                         message = str(table)
                     except ValueError as ve:
-                        message = str(ve)
+                        message = f"[red bold]{str(ve)}[/red bold]"
                 case "exit":
-                    print("Exiting...\n")
+                    self.__console.print("[bold #144575]Exiting...\n[/bold #144575]")
                     break
                 case _:
-                    message = "Invalid command.\n"
+                    message = "[bold red]Invalid command.[/bold red]"
                     
 ui = UI(Players.HUMAN_PLAYER)
 ui.run()
