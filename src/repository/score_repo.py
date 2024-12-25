@@ -29,9 +29,13 @@ class ScoreRepo:
                 self.__data.extend(tokens[:2])
         except FileNotFoundError:
             return
-        except ValueError as ve:
-            print(ve)
+        except ValueError:
+            self.__data.extend([-1, -1])
             return
+    
+    @property
+    def data(self):
+        return self.__data
 
 
 # score = ScoreRepo("src/repository/score.txt")

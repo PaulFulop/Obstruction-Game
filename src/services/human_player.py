@@ -13,5 +13,5 @@ class HumanPlayerService:
         self.__board_state = BoardStateService()
     
     def make_move(self, x:int, y:int):
-        self.__moves_service.mark(x, y, self.__symbol)
+        self.__moves_service.mark(x, y, self.__symbol, 0)
         self.__board_state.record_state(self.__moves_service.board, 0)

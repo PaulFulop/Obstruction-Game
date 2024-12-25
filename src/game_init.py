@@ -1,4 +1,4 @@
-# Basically the main service which handles the whole functionality and logic of the game using the other services.
+# Class that encapsulated all the other services.
 
 import sys
 sys.path.append("./src")
@@ -11,7 +11,7 @@ class Players(Enum):
     HUMAN_PLAYER = 0
     AI_PLAYER = 1
 
-class GameService:
+class GameInit:
     def __init__(self, firstPlayer:Players):
         self.__board = Board()
         self.__moves_service = MoveService(self.__board)
@@ -24,15 +24,19 @@ class GameService:
             self.__flag = True
             self.__human = HumanPlayerService(self.__moves_service, "X")
             self.__computer = AIPlayerService(self.__moves_service, "0")
-    
-    def play_turn(self, x:int, y:int):
-        if self.__flag == False:
-            self.__human.make_move(x, y)
-            self.__computer.make_move()
-        else:
-            self.__computer.make_move()
-            self.__human.make_move(x, y)
 
     @property
     def board(self):
         return self.__board
+    
+    @property
+    def flag(self):
+        return self.__flag
+    
+    @property
+    def human(self):
+        return self.__human
+    
+    @property
+    def computer(self):
+        return self.__computer
