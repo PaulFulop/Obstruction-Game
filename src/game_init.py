@@ -6,7 +6,7 @@ from domain.board import Board
 from services.ai_player import AIPlayerService
 from services.human_player import HumanPlayerService
 from services.moves import MoveService
-from repository.score_repo import ScoreRepo
+from services.state import BoardStateService
 
 from enum import Enum
 class Players(Enum):
@@ -17,7 +17,7 @@ class GameInit:
     def __init__(self, firstPlayer:Players):
         self.__board = Board()
         self.__moves_service = MoveService(self.__board)
-        self.__score_repo = ScoreRepo("src/repository/score.txt")
+        self.__state = BoardStateService()
 
         if firstPlayer.name == "HUMAN_PLAYER":
             self.__flag = False
@@ -48,3 +48,7 @@ class GameInit:
     @property
     def computer(self):
         return self.__computer
+    
+    @property
+    def state(self):
+        return self.__state

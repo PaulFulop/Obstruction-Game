@@ -8,11 +8,9 @@ from prettytable import PrettyTable
 from game_exceptions import GameOverError
 from rich.console import Console
 
-# TODO fix txt repo problem
 class UI:
     def __init__(self, firstPlayer:Players):
         self.__game = GameInit(firstPlayer)
-        self.__score_repo = ScoreRepo("src/repository/score.txt")
         self.__first_player_info = "(you will play first)" if self.__game.flag == False else "(the computer will play first)"
         self.__console = Console()
 
@@ -44,12 +42,14 @@ class UI:
         x = int(tokens[0].strip())
         y = int(tokens[1].strip())
         self.__game.human.make_move(x, y)
+        self.__game.state.record_state(self.__game.board, 0)
 
     def display_computer_move(self):
         self.redraw_board()
         with self.__console.status("Computer thinking..."):
             time.sleep(1.6) 
         self.__game.computer.make_move()
+        self.__game.state.record_state(self.__game.board, 1)
     
     def run(self):
         message = ""
@@ -101,7 +101,7 @@ class UI:
                                         time.sleep(2.25)
                 case "score":
                     try:
-                        tokens = self.__score_repo.data
+                        tokens = self.__game.state.score_serv.list_score()
                         h_points, c_points = tokens[0], tokens[1]
                         
                         table = PrettyTable(("human", "computer"))

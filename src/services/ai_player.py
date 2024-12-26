@@ -10,7 +10,6 @@ class AIPlayerService:
     def __init__(self, moves_service:MoveService, symbol:str):
         self.__moves_service = moves_service
         self.__symbol = symbol
-        self.__board_state = BoardStateService()
     
     # minimax alg functions below
     def make_move(self):
@@ -22,7 +21,6 @@ class AIPlayerService:
             y = random.randint(0, 5)
         
         self.__moves_service.mark(x, y, self.__symbol, 0)
-        self.__board_state.record_state(self.__moves_service.board, 1)
 
     def minimax(self):
         pass
