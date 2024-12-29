@@ -58,7 +58,9 @@ class Board:
     
     def __setitem__(self, index, value):
         self.__board.__setitem__(index, value)
-        self.__free_cells.remove(index)
+
+        if index in self.__free_cells:
+            self.__free_cells.remove(index)
     
     @property
     def free_cells(self):
@@ -73,6 +75,8 @@ class Board:
 # board[4, 3] = 'X'
 # board[3, 4] = 'X'
 # board[3, 5] = 'X'
+
+# print(board)
 # print(board)
 # print(board.free_cells)
 # print(len(board.free_cells))

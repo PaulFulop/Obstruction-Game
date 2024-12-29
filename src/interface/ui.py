@@ -14,7 +14,7 @@ class UI:
         self.__console = Console()
 
     def display_commands(self):
-        self.__console.print("[bold underline #61149c]OBSTRUCTION GAME[/bold underline #61149c]\n\n"
+        self.__console.print("[bold underline #61149c]OBSTRUCTION[/bold underline #61149c]\n\n"
               "List of commands:\n\n"
               f"start -> start a new round {self.__first_player_info}\n"
               "score -> show the score\n"

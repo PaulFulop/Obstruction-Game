@@ -13,16 +13,20 @@ class AIPlayerService:
     def make_move(self):
         pass
 
-    def minimax(self, board:Board, depth:int, max_player:bool):
-        pass
+    def minimax(self, board:Board, max_player:bool):
+        if self.__terminal_state():
+            return self.__eval_function(max_player)
+        
+        if max_player == True:
+            for move in self.__moves_service.board.free_cells:
+                pass
 
     def __terminal_state(self):
         return len(self.__moves_service.board.free_cells) == 0
 
-    # basically the score. the max player (X) wants to maximize this score and the min player (O) wants to minimize it
-    def __value(self):
-        value = self.__moves_service.board.free_cells
-        return value if self.__symbol == 'X' else -value
+    # returns 1 if on a state of the board the first player wins, -1 otherwise
+    def __eval_function(self, max_player:bool):
+        return 1000 if max_player == True else -1000
 
 
 # board = Board()
