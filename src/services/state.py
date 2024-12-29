@@ -11,19 +11,10 @@ class BoardStateService:
         self.__score_serv = ScoreService()
 
     def record_state(self, board:Board, flag:bool):
-        if BoardStateService.check_game_over(board) == True:
+        if len(board.free_cells) == 0:
             current_player = "You" if not flag else "The computer" 
             self.__score_serv.update_score(flag)
             raise GameOverError(current_player)
-
-    @staticmethod
-    def check_game_over(board:Board):
-        for i in range(0, 6):
-            for j in range(0, 6):
-                if board[i, j] == ' ':
-                    return False
-        
-        return True
     
     @property
     def score_serv(self):

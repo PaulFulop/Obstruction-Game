@@ -42,6 +42,7 @@ class Board:
         self.__board = CustomTextTable()
         rows = [[' ' for _ in range(6)] for _ in range(6)]
         self.__board.add_rows(rows, header=False)
+        self.__free_cells = [(i, j) for i in range(6) for j in range(6)] 
     
     def __str__(self):
         brown = f"\x1b[38;2;{99};{70};{43}m"
@@ -57,9 +58,21 @@ class Board:
     
     def __setitem__(self, index, value):
         self.__board.__setitem__(index, value)
+        self.__free_cells.remove(index)
+    
+    @property
+    def free_cells(self):
+        return self.__free_cells
 
 # board = Board()
 # board[1, 2] = 'O'
 # board[1, 3] = 'X'
 # board[2, 3] = '*'
+# board[4, 4] = 'X'
+# board[4, 5] = 'X'
+# board[4, 3] = 'X'
+# board[3, 4] = 'X'
+# board[3, 5] = 'X'
 # print(board)
+# print(board.free_cells)
+# print(len(board.free_cells))
