@@ -18,6 +18,7 @@ class AIPlayerService:
         for x, y in self.__moves_service.board.free_cells:
             self.__moves_service.mark(x, y, self.__symbol)
             score = self.minimax(not is_maximizing, 0)
+            score += (36 - len(self.__moves_service.board.free_cells)) * (1 if is_maximizing == True else -1)
             self.__moves_service.undo()
 
             if (is_maximizing and score > best_score) or (not is_maximizing and score < best_score):
@@ -34,17 +35,15 @@ class AIPlayerService:
             best = -1001
             for move in self.__moves_service.board.free_cells:
                 self.__moves_service.mark(move[0], move[1], 'O')
-                best = max(best, self.minimax(False, depth + 1) + (36 - len(self.__moves_service.board.free_cells)))
+                best = max(best, self.minimax(False, depth + 1))
                 self.__moves_service.undo() 
-            #print(depth)
             return best
         else:
             best = 1001
             for move in self.__moves_service.board.free_cells:
                 self.__moves_service.mark(move[0], move[1], 'X')
-                best = min(best, self.minimax(True, depth + 1) - (36 - len(self.__moves_service.board.free_cells)))
+                best = min(best, self.minimax(True, depth + 1))
                 self.__moves_service.undo()
-            #print(depth)
             return best
 
 
@@ -56,15 +55,12 @@ class AIPlayerService:
         return 1000 if not max_player == True else -1000
 
 
-# board = Board()
-# move = MoveService(board)
-# move.mark(0, 0, 'X')
-# move.mark(0, 2, 'X')
-# move.mark(0, 4, 'X')
-
-# move.mark(5, 5, 'X')
-# move.mark(2, 2, 'X')
-# move.mark(2, 4, 'X')
+board = Board()
+move = MoveService(board)
+move.mark(0, 0, 'X')
+move.mark(0, 2, 'X')
+move.mark(2, 2, 'X')
+move.mark(2, 4, 'X')
 # move.mark(5, 1, 'X')
 
 #move.mark(4, 0, 'X')
@@ -73,11 +69,14 @@ class AIPlayerService:
 
 #print(len(move.board.free_cells))
 
-# ai1 = AIPlayerService(move, 'O')
+ai1 = AIPlayerService(move, 'O')
 # ai2 = AIPlayerService(move, 'X')
 
+ai1.make_move()
+# ai2.make_move()
 # ai1.make_move()
-# print(board)
+
+print(board)
 
 #try:
     #ai1.make_move()
