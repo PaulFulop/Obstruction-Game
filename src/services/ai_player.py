@@ -18,7 +18,7 @@ class AIPlayerService:
         for x, y in self.__moves_service.board.free_cells:
             self.__moves_service.mark(x, y, self.__symbol)
             score = self.minimax(not is_maximizing, 0)
-            score += (36 - len(self.__moves_service.board.free_cells)) * (1 if is_maximizing == True else -1)
+            score += (36 - len(self.__moves_service.board.free_cells)) * (1 if is_maximizing else -1)
             self.__moves_service.undo()
 
             if (is_maximizing and score > best_score) or (not is_maximizing and score < best_score):
