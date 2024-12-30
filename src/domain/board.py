@@ -59,7 +59,9 @@ class Board:
     def __setitem__(self, index, value):
         self.__board.__setitem__(index, value)
 
-        if index in self.__free_cells:
+        if value == ' ' and index not in self.__free_cells:
+            self.__free_cells.append(index)
+        elif value != ' ' and index in self.__free_cells:
             self.__free_cells.remove(index)
     
     @property

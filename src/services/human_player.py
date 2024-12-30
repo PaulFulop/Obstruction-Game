@@ -12,4 +12,4 @@ class HumanPlayerService:
         self.__symbol = symbol
     
     def make_move(self, x:int, y:int):
-        self.__moves_service.mark(x, y, self.__symbol, '*', 0)
+        self.__moves_service.mark(x, y, self.__symbol)
