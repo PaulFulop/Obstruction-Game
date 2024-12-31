@@ -9,12 +9,12 @@ from rich.console import Console
 
 class UI:
     def __init__(self, firstPlayer:Players):
-        self.__game = GameInit(firstPlayer)
+        self.__game = GameInit(firstPlayer, 3)
         self.__first_player_info = "(you will play first)" if self.__game.flag == False else "(the computer will play first)"
         self.__console = Console()
 
     def display_commands(self):
-        self.__console.print("[bold underline #61149c]OBSTRUCTION[/bold underline #61149c]\n\n"
+        self.__console.print("[bold underline #327fc7]OBSTRUCTION[/bold underline #327fc7]\n\n"
               "List of commands:\n\n"
               f"start -> start a new round {self.__first_player_info}\n"
               "score -> show the score\n"
@@ -46,8 +46,8 @@ class UI:
     def display_computer_move(self):
         self.redraw_board()
         with self.__console.status("Computer thinking..."):
-            time.sleep(1.6) 
-        self.__game.computer.make_move()
+            self.__game.computer.make_move()
+            
         self.__game.state.record_state(self.__game.board, 1)
     
     def run(self):
@@ -114,5 +114,5 @@ class UI:
                 case _:
                     message = "[bold red]Invalid command.[/bold red]"
                     
-ui = UI(Players.HUMAN_PLAYER)
+ui = UI(Players.AI_PLAYER)
 ui.run()

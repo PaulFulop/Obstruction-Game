@@ -14,7 +14,7 @@ class Players(Enum):
     AI_PLAYER = 1
 
 class GameInit:
-    def __init__(self, firstPlayer:Players):
+    def __init__(self, firstPlayer:Players, difficulty:int):
         self.__board = Board()
         self.__moves_service = MoveService(self.__board)
         self.__state = BoardStateService()
@@ -22,11 +22,11 @@ class GameInit:
         if firstPlayer.name == "HUMAN_PLAYER":
             self.__flag = False
             self.__human = HumanPlayerService(self.__moves_service, "O")
-            self.__computer = AIPlayerService(self.__moves_service, "X")
+            self.__computer = AIPlayerService(self.__moves_service, "X", difficulty)
         else:
             self.__flag = True
             self.__human = HumanPlayerService(self.__moves_service, "X")
-            self.__computer = AIPlayerService(self.__moves_service, "O")
+            self.__computer = AIPlayerService(self.__moves_service, "O", difficulty)
     
     def clear_board(self):
         for i in range(0, 6):

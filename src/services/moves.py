@@ -59,8 +59,8 @@ class MoveService:
 
 
 
-# board = Board()
-# move = MoveService(board)
+board = Board()
+move = MoveService(board)
 # move.mark(0, 0, 'O')
 # move.mark(0, 2, 'X')
 # print(move.board.free_cells)
@@ -80,16 +80,8 @@ class MoveService:
 # print(move.board.free_cells)
 
 # try:
-#     move.mark(0, 0, 'X', '*', 0)
-#     move.mark(1, 2, 'O', '*',  0)
-#     move.mark(5, 5, 'X','*',  0)
-#     move.mark(5, 3, 'X','*',  0)
-#     move.mark(3, 4, 'X','*',  0)
-#     move.mark(0, 5, 'X','*',  0)
-#     move.mark(3, 0, 'X','*',  0)
-#     move.mark(3, 2, 'O','*',  0)
-#     move.mark(5, 0, 'O','*',  0)
-#     move.mark(5, 0, ' ', ' ', 0)
+#     print(board.filter_symmetric_positions())
+#     print(board.free_cells)
 # except Exception as e:
 #     print(e)
 

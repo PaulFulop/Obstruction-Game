@@ -64,6 +64,24 @@ class Board:
         elif value != ' ' and index in self.__free_cells:
             self.__free_cells.remove(index)
     
+    # Only works well for the empty board -> used for optimization on the minimax algorithm by reducing the number of moves to verify
+    def filter_symmetric_positions(self):
+        positions = self.free_cells[:]
+
+        for position in positions:
+            x, y = position
+            
+            if (y, 5 - x) in positions:
+                positions.remove((y, 5 - x))
+
+            if (5 - x, 5 - y) in positions:
+                positions.remove((5 - x, 5 - y))
+            
+            if (5 - y, x) in positions:
+                positions.remove((5 - y, x))
+        
+        return positions
+    
     @property
     def free_cells(self):
         return self.__free_cells
