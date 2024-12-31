@@ -13,3 +13,7 @@ class OccpiedCellError(GameException):
 class GameOverError(GameException):
     def __init__(self, current_player:str):
         super().__init__(f"{current_player} won!")
+
+class PropertiesError(GameException):
+    def __init__(self):
+        super().__init__("The settings.properties file has incomplete/invalid information about the game properties or it doesn't exist.")

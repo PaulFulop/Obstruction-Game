@@ -8,8 +8,8 @@ from game_exceptions import GameOverError
 from rich.console import Console
 
 class UI:
-    def __init__(self, firstPlayer:Players):
-        self.__game = GameInit(firstPlayer, 3)
+    def __init__(self, firstPlayer:Players, difficulty:int):
+        self.__game = GameInit(firstPlayer, difficulty)
         self.__first_player_info = "(you will play first)" if self.__game.flag == False else "(the computer will play first)"
         self.__console = Console()
 
@@ -47,7 +47,7 @@ class UI:
         self.redraw_board()
         with self.__console.status("Computer thinking..."):
             self.__game.computer.make_move()
-            
+
         self.__game.state.record_state(self.__game.board, 1)
     
     def run(self):
@@ -113,6 +113,3 @@ class UI:
                     break
                 case _:
                     message = "[bold red]Invalid command.[/bold red]"
-                    
-ui = UI(Players.AI_PLAYER)
-ui.run()
