@@ -1,8 +1,9 @@
 #Board for the game
 
 from texttable import Texttable
-from rich.console import Console
-from rich.text import Text
+import pygame
+
+pygame.init()
 
 class CustomTextTable(Texttable):
     def __init__(self):
@@ -38,6 +39,12 @@ class CustomTextTable(Texttable):
             raise IndexError("Invalid index format.")
 
 class Board:
+
+    BORDER_COLOR = (32, 34, 36)
+    LIGHT_GREY = (212, 210, 217)
+    BLUE = (60, 133, 181)
+    RED = (186, 17, 17)
+
     def __init__(self):
         self.__board = CustomTextTable()
         rows = [[' ' for _ in range(6)] for _ in range(6)]
@@ -81,6 +88,28 @@ class Board:
                 positions.remove((5 - y, x))
         
         return positions
+
+    def draw(self, surface:pygame.Surface, x:float, y:float, size:float):
+        font = pygame.font.Font('src/JetBrainsMono-Bold.ttf', 50) # font that we have to use for writing on the board
+        for row in range(6):
+            for col in range(6):
+                rect = pygame.Rect(x + col * (size + 3), y + row * (size + 3), size, size)
+                pygame.draw.rect(surface, Board.BORDER_COLOR, rect, 3, 17)
+                
+                color = None
+                match self.__board[row, col]:
+                    case 'X':
+                        color = Board.BLUE
+                    case 'O':
+                        color = Board.RED
+                    case '*':
+                        color = Board.LIGHT_GREY
+                    case _:
+                        color = (255, 255, 255)
+                text = font.render(self.__board[row, col], True, color, None)
+                text_rect = text.get_rect()
+                text_rect.center = rect.center
+                surface.blit(text, text_rect)
     
     @property
     def free_cells(self):

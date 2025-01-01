@@ -41,14 +41,14 @@ class UI:
         x = int(tokens[0].strip())
         y = int(tokens[1].strip())
         self.__game.human.make_move(x, y)
-        self.__game.state.record_state(self.__game.board, 0)
+        self.__game.state.record_state(self.__game.board, False)
 
     def display_computer_move(self):
         self.redraw_board()
         with self.__console.status("Computer thinking..."):
             self.__game.computer.make_move()
 
-        self.__game.state.record_state(self.__game.board, 1)
+        self.__game.state.record_state(self.__game.board, True)
     
     def run(self):
         message = ""
