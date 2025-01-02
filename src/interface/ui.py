@@ -12,13 +12,22 @@ class UI:
         self.__game = GameInit(firstPlayer, difficulty)
         self.__first_player_info = "(you will play first)" if self.__game.flag == False else "(the computer will play first)"
         self.__console = Console()
+        
+        match difficulty:
+            case 1:
+                self.__difficulty_mode = "[bold #50a353]easy[/bold #50a353]"
+            case 2:
+                self.__difficulty_mode = "[bold #eb7d34]medium[/bold #eb7d34]"
+            case _:
+                self.__difficulty_mode = "[bold red]hard[/bold red]"
 
     def display_commands(self):
         self.__console.print("[bold underline #327fc7]OBSTRUCTION[/bold underline #327fc7]\n\n"
               "List of commands:\n\n"
               f"start -> start a new round {self.__first_player_info}\n"
               "score -> show the score\n"
-              "exit -> exit the game\n") 
+              "exit -> exit the game\n\n"
+              f"Difficulty: {self.__difficulty_mode}\n") 
     
     @staticmethod
     def clear_console():
@@ -70,7 +79,10 @@ class UI:
                                 self.display_computer_move()
                             except GameOverError as goe:
                                 self.redraw_board()
-                                self.__console.print(f"[bold #50a353]{goe}\n[/bold #50a353]")
+
+                                wl_color = "#50a353" if str(goe).split()[0].strip() == "You" else "#e83b35"
+                                self.__console.print(f"[bold {wl_color}]{goe}\n[/bold {wl_color}]")
+
                                 self.__game.clear_board()
                                 should_redraw = False
                                 break
@@ -84,7 +96,10 @@ class UI:
                                 self.display_human_move()
                             except GameOverError as goe:
                                 self.redraw_board()
-                                self.__console.print(f"[bold #50a353]{goe}\n[/bold #50a353]")
+
+                                wl_color = "#50a353" if str(goe).split()[0].strip() == "You" else "#e83b35"
+                                self.__console.print(f"[bold {wl_color}]{goe}\n[/bold {wl_color}]")
+
                                 self.__game.clear_board()
                                 should_redraw = False
                                 break

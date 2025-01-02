@@ -1,9 +1,6 @@
 #Board for the game
 
 from texttable import Texttable
-import pygame
-
-pygame.init()
 
 class CustomTextTable(Texttable):
     def __init__(self):
@@ -88,28 +85,6 @@ class Board:
                 positions.remove((5 - y, x))
         
         return positions
-
-    def draw(self, surface:pygame.Surface, x:float, y:float, size:float):
-        font = pygame.font.Font('src/JetBrainsMono-Bold.ttf', 50) # font that we have to use for writing on the board
-        for row in range(6):
-            for col in range(6):
-                rect = pygame.Rect(x + col * (size + 3), y + row * (size + 3), size, size)
-                pygame.draw.rect(surface, Board.BORDER_COLOR, rect, 3, 17)
-                
-                color = None
-                match self.__board[row, col]:
-                    case 'X':
-                        color = Board.BLUE
-                    case 'O':
-                        color = Board.RED
-                    case '*':
-                        color = Board.LIGHT_GREY
-                    case _:
-                        color = (255, 255, 255)
-                text = font.render(self.__board[row, col], True, color, None)
-                text_rect = text.get_rect()
-                text_rect.center = rect.center
-                surface.blit(text, text_rect)
     
     @property
     def free_cells(self):

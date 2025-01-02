@@ -3,7 +3,7 @@ sys.path.append("./src")
 from game_exceptions import PropertiesError
 from game_init import Players
 from interface.ui import UI
-#from interface.gui import 
+from interface.gui import GUI 
 
 def get_properties():
     try:
@@ -38,7 +38,8 @@ def start_game():
             ui = UI(props[1], props[2])
             ui.run()
         else:
-            pass
+            gui = GUI(props[1], props[2])
+            gui.run()
     except PropertiesError:
         ui = UI(Players.HUMAN_PLAYER, 3)
         ui.run()
