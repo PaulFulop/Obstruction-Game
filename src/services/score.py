@@ -8,7 +8,7 @@ class ScoreService:
     def __init__(self, file_path:str):
         """Class onstructor. Will create a ScoreRepo object that loads data from the txt file located at file_path upon calling. 
 
-        :param file_path: _description_
+        :param file_path: path to the desired file
         :type file_path: str
         """
         self.__score_repo = ScoreRepo(file_path)
