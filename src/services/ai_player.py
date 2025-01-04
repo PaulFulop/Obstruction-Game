@@ -175,7 +175,7 @@ class SmartAIPlayer(StupidAIPlayer):
                 1 -> all the cells that are symmetric (e.g. cell[1, 1] is symmetric to cell[1, 4], cell[4, 1] and cell[4, 4])
                      because especially when dealing with an empty board, making a move on multiple symmetric cells will result in
                      same outcome overall
-                2 -> all the cells that are in the corner or at a margin (e.g. cell[0, 1], cell[5, 5] etc) because especially
+                2 -> all the cells that are in the corner or on a margin (e.g. cell[0, 1], cell[5, 5] etc) because especially
                      in the beginning, occupying as much space as possible is crucial and playing in the corner or on a margin 
                      will drastically decrease the possibility of winning.
 
