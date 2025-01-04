@@ -172,7 +172,7 @@ class SmartAIPlayer(StupidAIPlayer):
     def _get_best_candidate_cells(self):
         """ If the computer is the first to play, it will have to go through the whole board and analyze every move possible,
             which is very time consuming.This funtion will reduce the number of moves the computer has to analyze by removing:
-                1 -> all the cells that are symmetric (e.g. cell[1, 1] is symmetric to cell[1, 3], cell[3, 1] and cell[4, 4])
+                1 -> all the cells that are symmetric (e.g. cell[1, 1] is symmetric to cell[1, 4], cell[4, 1] and cell[4, 4])
                      because especially when dealing with an empty board, making a move on multiple symmetric cells will result in
                      same outcome overall
                 2 -> all the cells that are in the corner or at a margin (e.g. cell[0, 1], cell[5, 5] etc) because especially
