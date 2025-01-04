@@ -1,3 +1,5 @@
+# Repository for the score between the human and computer
+
 import sys
 sys.path.append("./src")
 
@@ -33,6 +35,3 @@ class ScoreRepo:
     @property
     def data(self):
         return self.__data
-
-
-# score = ScoreRepo("src/repository/score.txt")

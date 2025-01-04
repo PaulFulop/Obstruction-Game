@@ -17,7 +17,7 @@ class GameInit:
     def __init__(self, firstPlayer:Players, difficulty:int):
         self.__board = Board()
         self.__moves_service = MoveService(self.__board)
-        self.__state = BoardStateService()
+        self.__state = BoardStateService("src/repository/score.txt")
 
         if firstPlayer.name == "HUMAN_PLAYER":
             self.__flag = False

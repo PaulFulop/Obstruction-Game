@@ -1,4 +1,4 @@
-#Service for the computer moves. How should the AI play (minmax alg.)
+#Service for the computer moves (how should the AI play)
 
 import sys, random
 sys.path.append("./src")

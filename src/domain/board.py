@@ -89,18 +89,3 @@ class Board:
     @property
     def free_cells(self):
         return self.__free_cells
-
-# board = Board()
-# board[1, 2] = 'O'
-# board[1, 3] = 'X'
-# board[2, 3] = '*'
-# board[4, 4] = 'X'
-# board[4, 5] = 'X'
-# board[4, 3] = 'X'
-# board[3, 4] = 'X'
-# board[3, 5] = 'X'
-
-# print(board)
-# print(board)
-# print(board.free_cells)
-# print(len(board.free_cells))

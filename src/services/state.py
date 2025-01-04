@@ -7,8 +7,8 @@ from game_exceptions import GameOverError
 from services.score import ScoreService
 
 class BoardStateService:
-    def __init__(self):
-        self.__score_serv = ScoreService()
+    def __init__(self, file_path:str):
+        self.__score_serv = ScoreService(file_path)
 
     def record_state(self, board:Board, flag:bool):
         if len(board.free_cells) == 0:

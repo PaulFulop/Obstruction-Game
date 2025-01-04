@@ -2,7 +2,7 @@
 
 import sys, os, time
 sys.path.append("./src")
-from game_init import GameInit, Players
+from services.game_init import GameInit, Players
 from prettytable import PrettyTable
 from game_exceptions import GameOverError
 from rich.console import Console

@@ -1,13 +1,9 @@
-# Allowing players to make moves (marking an X or O on the board).
-# Validating moves (ensuring the chosen cell is empty and within bounds).
-# Drawing the contour around X/0 
+# Allowing players to make moves (marking an X or O on the board)
 
-# TODO clean every test comment after everything is finished
 import sys
 sys.path.append("./src")
 from domain.board import Board
 from game_exceptions import OutOfBoardError, OccpiedCellError
-#from services.state import BoardStateService
 
 class MoveService:
     __directions = [(0, 0), (-1, -1), (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (0, -1), (1, -1)]
@@ -57,32 +53,9 @@ class MoveService:
     def board(self):
         return self.__board
 
-
+    @property
+    def history(self):
+        return self.__history
 
 board = Board()
 move = MoveService(board)
-# move.mark(0, 0, 'O')
-# move.mark(0, 2, 'X')
-# print(move.board.free_cells)
-# print(board)
-# move.undo()
-# print(move.board.free_cells)
-# print(board)
-# move.undo()
-# print(move.board.free_cells)
-# print(board)
-
-
-#print(move.cells_to_mark(0, 1, 0, []))
-# move.mark(0, 0, 'X', '*', 0)
-# move.mark(0, 0, ' ', ' ', 0)
-# print(board)
-# print(move.board.free_cells)
-
-# try:
-#     print(board.filter_symmetric_positions())
-#     print(board.free_cells)
-# except Exception as e:
-#     print(e)
-
-# print(board)

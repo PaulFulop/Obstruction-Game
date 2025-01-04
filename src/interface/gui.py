@@ -1,8 +1,8 @@
-import pygame 
+# For playing on a custom window 
 
-import sys
+import sys, pygame
 sys.path.append("./src")
-from game_init import GameInit, Players
+from services.game_init import GameInit, Players
 from game_exceptions import GameOverError
 
 class GUI:

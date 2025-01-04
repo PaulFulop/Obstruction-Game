@@ -5,8 +5,8 @@ sys.path.append("./src")
 from repository.score_repo import ScoreRepo
 
 class ScoreService:
-    def __init__(self):
-        self.__score_repo = ScoreRepo("src/repository/score.txt")
+    def __init__(self, file_path:str):
+        self.__score_repo = ScoreRepo(file_path)
     
     def list_score(self):
         return self.__score_repo.data

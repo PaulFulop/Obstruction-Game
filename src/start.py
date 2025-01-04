@@ -1,7 +1,9 @@
+# For starting the game and choosing which mode to play on (console or custom window with pygame)
+
 import sys
 sys.path.append("./src")
 from game_exceptions import PropertiesError
-from game_init import Players
+from services.game_init import Players
 from interface.ui import UI
 from interface.gui import GUI 
 
