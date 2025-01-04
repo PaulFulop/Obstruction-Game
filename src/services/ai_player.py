@@ -132,22 +132,3 @@ class NormalAIPlayer(SmartAIPlayer):
                 best_move = (x, y)
         
         self._moves_service.mark(best_move[0], best_move[1], self._symbol)
-    
-
-# board = Board()
-# move = MoveService(board)
-
-# ai1 = SmartAIPlayer(move, 'O')
-# ai2 = NormalAIPlayer(move, 'O')
-# ai3 = StupidAIPlayer(move, 'O')
-
-# move.mark(2, 2, 'O')
-# move.mark(4, 4, 'O')
-# move.mark(5, 1, 'O')
-# move.mark(5, 0, 'X')
-
-
-#ai1.make_move()
-#ai1.make_move()
-#ai1.make_move()
-#print(board)
