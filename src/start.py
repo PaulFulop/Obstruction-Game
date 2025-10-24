@@ -15,7 +15,7 @@ def get_properties():
             for line in lines:
                 tokens.append(line.split('=')[1].removesuffix('\n').strip().lower())
     except FileNotFoundError:
-        return
+        raise PropertiesError
     
     if len(lines) == 0:
         raise PropertiesError 
