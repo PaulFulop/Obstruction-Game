@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/AM3fGEK5)
 # :video_game: Assignment 10 - Let's play
 ## Requirements
@@ -50,3 +51,6 @@ The game is described [here](https://ro.wikipedia.org/wiki/Avioane_(joc))
 The game is described [here](https://en.wikipedia.org/wiki/Reversi)
 
 
+=======
+# Obstruction-Game
+>>>>>>> 55fb82534b75047ddca075e6a0ce47455a1d6ad1
